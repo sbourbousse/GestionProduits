@@ -24,7 +24,11 @@ private slots:
 
     void loadRayonList();
 
-    void on_comboBoxRayonListe_currentIndexChanged(const QString &arg1);
+    void on_pushButtonAddRayon_clicked();
+
+    void on_pushButtonBrowsePicture_clicked();
+
+    void on_pushButtonAddProduit_clicked();
 
 private:
     Ui::MainWindow *ui;
