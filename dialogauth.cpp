@@ -2,7 +2,6 @@
 #include "ui_dialogauth.h"
 #include <QtSql>
 
-
 DialogAuth::DialogAuth(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogAuth)
@@ -15,10 +14,10 @@ DialogAuth::~DialogAuth()
     delete ui;
 }
 
-void DialogAuth::on_pushButton_clicked()
+void DialogAuth::on_pushButtonConnexion_clicked()
 {
-    QString username = ui->lineEditUsername->text();
-    QString password = ui->lineEditPassword->text();
+    QString username = ui->lineEditNomUtilisateur->text();
+    QString password = ui->lineEditMotDePasse->text();
 
     QString queryUserText = "select userUsername,userPassword from User where userUsername='"+username+"' and userPassword='"+password+"'";
     QSqlQuery queryUser(queryUserText);
@@ -30,6 +29,6 @@ void DialogAuth::on_pushButton_clicked()
     }
     else
     {
-        //ui->labelErrorMessage->setText("Nom d'utilisateur ou mot de passe incorrect.");
+        ui->labelErreurConnexion->setText("Nom d'utilisateur ou mot de passe incorrect.");
     }
 }

@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSqlQuery>
+#include <QIcon>
+#include <QFileDialog>
+#include <QCloseEvent>
+#include <QDebug>
+#include "dialograyon.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,22 +21,30 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void closeEvent(QCloseEvent *event);
+
+    void chargerLesRayons();
+
+    void chargerComboBoxUniteMesureProduit();
+
+    void chargerTableauProduits();
+
+    void on_pushButtonValiderProduit_clicked();
+
+    void on_pushButtonImageProduit_clicked();
+
+    void on_pushButtonAjoutRayon_clicked();    
+
+
 private slots:
-    void on_listeButtonPageAjout_clicked();
+    void on_pushButtonSupprimerProduit_clicked();
 
-    void on_ajoutButtonPageListe_clicked();
-
-    void loadProductList();
-
-    void loadRayonList();
-
-    void on_pushButtonAddRayon_clicked();
-
-    void on_pushButtonBrowsePicture_clicked();
-
-    void on_pushButtonAddProduit_clicked();
+    void on_pushButtonModifierProduit_clicked();
 
 private:
+    QString idAModifier;
+    QString cheminImageProduit;
     Ui::MainWindow *ui;
 };
 

@@ -16,7 +16,7 @@ public:
     ~DialogAuth();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_pushButtonConnexion_clicked();
 
 private:
     Ui::DialogAuth *ui;
