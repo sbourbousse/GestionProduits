@@ -92,7 +92,7 @@ void DialogRayon::chargerTableauRayons()
     ui->tableWidgetRayon->hideColumn(0);
 
     //Apparence du tableau
-    QStringList mesEntetes= {"Identifiant","Libelle","Image","Nombre de produits"};
+    QStringList mesEntetes= {tr("Id"),tr("Label"),tr("Picture"),tr("Item amount")};
     ui->tableWidgetRayon->setHorizontalHeaderLabels(mesEntetes);
     ui->tableWidgetRayon->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidgetRayon->verticalHeader()->setVisible(false);
@@ -115,14 +115,14 @@ void DialogRayon::on_pushButtonSupprimer_clicked()
     maRequete.first();
     if(maRequete.value(0).toInt()>0)
     {
-        QString produitOuProduits = " produits";
+        QString produitOuProduits = tr(" products");
         //Accorder produits au singulier ou au pluriel
         if (maRequete.value(0).toInt()>1)
-            produitOuProduits = " produits";
+            produitOuProduits = tr(" products");
         else
-            produitOuProduits = " produit";
+            produitOuProduits = tr(" product");
 
-        int reponse = QMessageBox::warning(this,"Suppression du Rayon "+libelleRayon,"Etes vous sur de vouloir supprimer "+libelleRayon+"\nCe rayon comporte "+maRequete.value(0).toString()+produitOuProduits,QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
+        int reponse = QMessageBox::warning(this,tr("Delete the section ")+libelleRayon,tr("You are about to delete ")+libelleRayon+"\n"+tr("This section contains ")+maRequete.value(0).toString()+produitOuProduits,QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
 
         if(reponse==QMessageBox::Yes)
         {
@@ -182,7 +182,7 @@ void DialogRayon::on_pushButtonModifRayon_clicked()
         QSqlQuery maRequete("update Rayon set rayonLibelle=\""+rayonLibelleModifie+"\", rayonImage=\""+rayonImageModifie+"\" where rayonId="+idAModif);
     }
     else
-        ui->labelErrorMessageModif->setText("Veuillez remplir les champs correctement.");
+        ui->labelErrorMessageModif->setText(tr("Fields are incorrect"));
 
     //Charger les modifications apportées
     chargerTableauRayons();

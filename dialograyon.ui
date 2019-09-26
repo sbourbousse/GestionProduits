@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Gestion des rayons</string>
+   <string>Sections Panel</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -51,14 +51,14 @@
     <item row="1" column="0">
      <widget class="QPushButton" name="pushButtonSupprimer">
       <property name="text">
-       <string>Supprimer</string>
+       <string>Delete</string>
       </property>
      </widget>
     </item>
     <item row="1" column="1">
      <widget class="QPushButton" name="pushButtonModifier">
       <property name="text">
-       <string>Modifier</string>
+       <string>Edit</string>
       </property>
      </widget>
     </item>
@@ -74,7 +74,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="pageAjout">
     <widget class="QPushButton" name="pushButtonValiderRayon">
@@ -87,7 +87,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Valider</string>
+      <string>OK</string>
      </property>
     </widget>
     <widget class="QWidget" name="layoutWidget">
@@ -103,7 +103,7 @@
       <item>
        <widget class="QLabel" name="labelLibelleRayon">
         <property name="text">
-         <string>Libelle du rayon</string>
+         <string>Sections label</string>
         </property>
        </widget>
       </item>
@@ -113,17 +113,12 @@
       <item>
        <widget class="QPushButton" name="pushButtonImageRayon">
         <property name="text">
-         <string>Image</string>
+         <string>Browse picture</string>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
-    <zorder>pushButtonValiderRayon</zorder>
-    <zorder>layoutWidget</zorder>
-    <zorder>layoutWidget</zorder>
-    <zorder>pushButtonValiderRayon</zorder>
-    <zorder>layoutWidget</zorder>
    </widget>
    <widget class="QWidget" name="pageModif">
     <widget class="QPushButton" name="pushButtonModifRayon">
@@ -136,7 +131,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Modifier</string>
+      <string>OK</string>
      </property>
     </widget>
     <widget class="QWidget" name="layoutWidget_2">
@@ -152,7 +147,7 @@
       <item>
        <widget class="QLabel" name="labelLibelleRayonModif">
         <property name="text">
-         <string>Libelle du rayon</string>
+         <string>Sections label</string>
         </property>
        </widget>
       </item>
@@ -162,7 +157,7 @@
       <item>
        <widget class="QPushButton" name="pushButtonImageRayonModif">
         <property name="text">
-         <string>Image</string>
+         <string>Browse picture</string>
         </property>
        </widget>
       </item>
@@ -178,7 +173,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Abandonner</string>
+      <string>Cancel</string>
      </property>
     </widget>
     <widget class="QLabel" name="labelErrorMessageModif">

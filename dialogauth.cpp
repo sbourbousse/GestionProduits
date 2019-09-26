@@ -29,6 +29,6 @@ void DialogAuth::on_pushButtonConnexion_clicked()
     }
     else
     {
-        ui->labelErreurConnexion->setText("Nom d'utilisateur ou mot de passe incorrect.");
+        ui->labelErreurConnexion->setText(tr("Login or Password incorrect"));
     }
 }

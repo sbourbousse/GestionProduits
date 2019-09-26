@@ -4,6 +4,9 @@
 #
 #-------------------------------------------------
 
+TRANSLATIONS += gestionProduits_fr.ts \
+                gestionProduits_de.ts
+
 QT       += core gui sql
 
 CONFIG += c++11
@@ -37,3 +40,7 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     dialogauth.ui \
     dialograyon.ui
+
+RESOURCES += \
+    mesressources.qrc
+

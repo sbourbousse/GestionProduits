@@ -42,6 +42,10 @@ private slots:
 
     void on_pushButtonModifierProduit_clicked();
 
+    void on_pushButtonAnnulerProduitModif_clicked();
+
+    void on_pushButtonValiderProduitModif_clicked();
+
 private:
     QString idAModifier;
     QString cheminImageProduit;

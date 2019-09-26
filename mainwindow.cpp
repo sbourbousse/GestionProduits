@@ -93,7 +93,7 @@ void MainWindow::chargerTableauProduits()
     ui->tableWidgetProduit->hideColumn(0);
 
     //Apparence du tableau
-    QStringList mesEntetes= {"Identifiant","Libelle","Description","Prix Unitaire","Unité","Image","Rayon"};
+    QStringList mesEntetes= {tr("Id"),tr("Label"),tr("Description"),tr("Price"),tr("Unit"),tr("Picture"),tr("Section")};
     ui->tableWidgetProduit->setHorizontalHeaderLabels(mesEntetes);
     ui->tableWidgetProduit->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidgetProduit->verticalHeader()->setVisible(false);
@@ -135,7 +135,7 @@ void MainWindow::on_pushButtonValiderProduit_clicked()
     }
     else
     {
-        ui->labelErrorMessage->setText("Veuillez remplir les champs correctement.");
+        ui->labelErrorMessage->setText(tr("Fields are incorrect"));
         //QTimer::singleShot(5000,this,SLOT(chargerLesRayons()));
     }
 }
@@ -157,7 +157,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    int reponse = QMessageBox::warning(this,"Voulez vous quitter?","Etes vous sûr de vouloir quitter l'application ?",QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
+    int reponse = QMessageBox::warning(this,tr("Leave the application?"),tr("Are you sur you want to leave?"),QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
 
     switch (reponse)
     {
@@ -198,23 +198,89 @@ void MainWindow::on_pushButtonSupprimerProduit_clicked()
 void MainWindow::on_pushButtonModifierProduit_clicked()
 {
     //Je recupere et stock l'id à modifier
-    idAModifier = ui->tableWidgetProduit->item(ui->tableWidgetProduit->currentRow(),0);
+    idAModifier = ui->tableWidgetProduit->item(ui->tableWidgetProduit->currentRow(),0)->text();
 
     //Transition page modification
-    ui->tableWidgetProduit->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(1);
 
     //Requete pour recuperer les informations du produits
     QSqlQuery maRequete("select produitLibelle, produitDescription, produitPrixUnitaire, uniteId, produitImage, rayonId "
                         "from Produit where produitId="+idAModifier);
     //Prendre le premier résultat de la requete
     maRequete.first();
+
+    //Memoriser l'image
+    cheminImageProduit=maRequete.value(4).toString();
+
+
     //Remplir les champs d'information du produit
-    ui->lineEditLibelleProduitModif->setText(maRequete.value(0).toString());
-    ui->comboBoxRayonModif->setCurrentIndex();
-    ui->doubleSpinBoxPrixUnitaireModif->setValue(maRequete.value(2).toDouble());
-    ui->comboBoxUniteMesureProduitModif->setCurrentIndex();
-    ui->textEditDescriptionProduitModif->setText(maRequete.value(1).toString());
-    cheminImageProduit=
+    ui->lineEditLibelleProduit->setText(maRequete.value(0).toString());
+    ui->comboBoxRayon->setCurrentIndex(ui->comboBoxRayon->findData(maRequete.value(5)));
+    ui->doubleSpinBoxPrixUnitaire->setValue(maRequete.value(2).toDouble());
+    ui->comboBoxUniteMesureProduit->setCurrentIndex(ui->comboBoxUniteMesureProduit->findData(maRequete.value(3)));
+    ui->textEditDescriptionProduit->setText(maRequete.value(1).toString());
+    if (maRequete.value(4).toString().length()>0)
+        ui->labelImageProduit->setText(maRequete.value(4).toString());
 
 
+}
+
+void MainWindow::on_pushButtonAnnulerProduitModif_clicked()
+{
+    //Transition page ajout
+    ui->stackedWidget->setCurrentIndex(0);
+
+    //Vider les inputs
+    ui->lineEditLibelleProduit->setText("");
+    ui->comboBoxRayon->setCurrentIndex(0);
+    ui->doubleSpinBoxPrixUnitaire->setValue(0);
+    ui->comboBoxUniteMesureProduit->setCurrentIndex(0);
+    ui->textEditDescriptionProduit->setText("");
+    ui->labelImageProduit->setText(tr("No picture"));
+
+    //Vider variable temporaire
+    cheminImageProduit="";
+    idAModifier="";
+}
+
+void MainWindow::on_pushButtonValiderProduitModif_clicked()
+{
+    QString noRayon=ui->comboBoxRayon->currentData().toString();
+    QString monLibelle = ui->lineEditLibelleProduit->text();
+    QString maDescription = ui->textEditDescriptionProduit->toPlainText();
+    QString monPrixUnitaire = ui->doubleSpinBoxPrixUnitaire->text().replace(",",".");
+    QString monUniteDeMesure = ui->comboBoxUniteMesureProduit->currentData().toString();
+
+    if(monLibelle.length()>3 && ui->doubleSpinBoxPrixUnitaire->value()>0)
+    {
+        //Ma requete
+        QSqlQuery maRequete("update Produit set produitLibelle=\""+monLibelle+"\", rayonId=\""+noRayon+"\", produitDescription=\""+maDescription+"\","
+                            " produitPrixUnitaire="+monPrixUnitaire+", uniteId="+monUniteDeMesure+", produitImage=\""+cheminImageProduit+"\""
+                            " where produitId="+idAModifier);
+
+        qDebug()<<"update Produit set produitLibelle=\""+monLibelle+"\", rayonId=\""+noRayon+"\", produitDescription=\""+maDescription+"\","
+               " produitPrixUnitaire="+monPrixUnitaire+", uniteId="+monUniteDeMesure+", produitImage=\""+cheminImageProduit+"\""
+               " where produitId="+idAModifier;
+
+
+        //Transition page ajout
+        ui->stackedWidget->setCurrentIndex(0);
+
+        //Vider les inputs
+        ui->lineEditLibelleProduit->setText("");
+        ui->comboBoxRayon->setCurrentIndex(0);
+        ui->doubleSpinBoxPrixUnitaire->setValue(0);
+        ui->comboBoxUniteMesureProduit->setCurrentIndex(0);
+        ui->textEditDescriptionProduit->setText("");
+        ui->labelImageProduit->setText(tr("No picture"));
+
+        //Vider variable temporaire
+        cheminImageProduit="";
+        idAModifier="";
+
+        //Recharger le tableau
+        chargerTableauProduits();
+    }
+    else
+        ui->labelErrorMessage->setText(tr("Fiels are incorrect"));
 }

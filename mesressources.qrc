@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file>ressources/list-add.png</file>
+        <file>ressources/edit-delete.png</file>
+        <file>ressources/edit-select-all.png</file>
+        <file>ressources/index.png</file>
+        <file>ressources/list-remove.png</file>
+    </qresource>
+    <qresource prefix="/Traductions">
+        <file>ressources/gestionProduits_fr.qm</file>
+    </qresource>
+</RCC>

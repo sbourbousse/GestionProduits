@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Connectez vous</string>
+   <string>Authentification</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Se connecter</string>
+    <string>Connection</string>
    </property>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
@@ -40,7 +40,7 @@
        <item>
         <widget class="QLabel" name="labelNomUtilisateur">
          <property name="text">
-          <string>Nom d'utilisateur</string>
+          <string>Login</string>
          </property>
         </widget>
        </item>
@@ -54,7 +54,7 @@
        <item>
         <widget class="QLabel" name="labelMotDePasse">
          <property name="text">
-          <string>Mot de passe</string>
+          <string>Password</string>
          </property>
         </widget>
        </item>
@@ -85,7 +85,7 @@
        <item>
         <widget class="QPushButton" name="pushButtonConnexion">
          <property name="text">
-          <string>Connexion</string>
+          <string>OK</string>
          </property>
         </widget>
        </item>
