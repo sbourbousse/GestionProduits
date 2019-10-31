@@ -18,14 +18,15 @@ int main(int argc, char *argv[])
     a.installTranslator(&translator);
     /*
      * CONNEXION A LA BASE DE DONNEE
+     * ENTREZ LES PARAMETRES SUIVI
      */
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setDatabaseName("GestionProduit");
-    db.setUserName("AppliGestion");
-    db.setPassword("motdepasse");
+    db.setHostName(""); 
+    db.setDatabaseName("");
+    db.setUserName("");
+    db.setPassword("");
     bool ok = db.open();
-
+    
 
     /*
      * AUTHENTIFICATION
